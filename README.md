@@ -61,20 +61,20 @@ To implement the algorithm, I utilize object-oriented programming feature of Pyt
 - 2 = do nothing
 
 ## Trial #1 No Gravitational Objects
-This is a sanity check that the algorithm does work. The spaceship has an initial leftward velocity, and the target is right on the left of the starting point, so the best thing the model can do is to do nothing and the  From Figure 1(a), we can see that the model fails many times during the training. Figure 1(b) shows that the spaceship successfully arrives at the target, and Figure1(c) shows that the model indeed chooses to do nothing (action 2) throughout the travel.
+This is a sanity check that the algorithm does work. The spaceship has an initial leftward velocity, and the target is right on the left of the starting point, so the best thing the model can do is to do nothing. From Figure 1(a), we can see that the model fails quite a lot during the training (the final distance to B after a pre-defined maximum steps is non-zero). Figure 1(b) shows that the spaceship successfully arrives at the target after sufficient training, and Figure 1(c) shows that the model indeed chooses to do nothing (action 2) throughout the travel.
 
 ## Trial #2 One Gravitational Object
-With one gravitational object, the training is harder. Figure 2 shows a failing case. We can see from Figure 2(c) that the spaceship accelerates upward since the target but is above it, but the gravitational field ultimately deflects the spaceship and it passes the target. Figure 3 shows a successful case, and Figure 3(c) shows that the model gets "smarter" now and stays still or even accelerates downward from time to time to counter the effects of the gravitational field.
+With one gravitational object, the training is harder. Figure 2 shows a failing case. We can see from Figure 2(c) that the spaceship accelerates upward since the target is above it, but the gravitational field ultimately deflects the spaceship further upward such that the spaceship passes the target. Figure 3 shows a successful case, and Figure 3(c) shows that the model gets "smarter" now and stays still or even accelerates downward from time to time to counter the effects of the gravitational field.
 
 ## Trial #3 Two Gravitational Objects
-In this trial, I test the case of two gravitational objects in the space. (Figure 4) It is interesting to note that the final actions of the model is actually very regular even though the model has the capacity to perform highly variant actions: it accelerates upward continuously for some time and then downward. This may illustrate the Occam's Razor Principle.
+In this trial, I test the case of two gravitational objects in the space (Figure 4). It is interesting to note that the final actions of the model is actually very regular even though the model has the capacity to perform highly variant actions: it accelerates upward continuously for some time and then accelerates downward. This illustrates the Occam's Razor Principle.
 
 <img src='./figs/result1.png'> 
 
 ## Trial #4 Gravitational Object on the Way!
 In this trial, I test a much harder scenario: I place a planet in between the target and the starting point. It turns out the task is actually quite impossible to complete. Even though the spaceship continuously accelerates upward (Figure 5(c)), it still bumps into the planet (Figure 5(b), the size of the planet is not to scale, please see the y-axis).
 
-I then introduces a much more "powerful" spaceship with 1000× magnitude of acceleration. Things get more interesting as the spaceship passes the planet, but it's overly powerful such that the acceleration cannot be fine-tuned to arrive at the target (Figure6).
+I then introduce a much more "powerful" spaceship with 1000× magnitude of acceleration. Things get more interesting as the spaceship passes the planet, but it's overly powerful such that the acceleration cannot be fine-tuned to arrive at the target (Figure 6).
 
 Finally, I gives the spaceship more "degrees of freedom" by embedding two more actions: accelerate upward or downward with smaller magnitude. So now the action encoding is:
   - 0 = accelerate upward with large magnitude
@@ -82,12 +82,13 @@ Finally, I gives the spaceship more "degrees of freedom" by embedding two more a
   - 2 = accelerate upward with small magnitude
   - 3 = accelerate downward with small magnitude
   - 4 = no action
+
 The spaceship finally achieves the target (Figure 7).
 
 <img src='./figs/result2.png'> 
 
 # Discussion and Further Work
-I think this project is interesting in many ways. Certainly human beings would not be able to travel with spaceship through long distance in the near future, the algorithm may be applied to other robotic systems like autonomous vehicles. (They are of course using much more sophisticated and accurate techniques.)
+I think this project is interesting in many ways. Certainly human beings will not be able to travel with spaceship through long distance in the near future, but the algorithm may be applied to other robotic systems like autonomous vehicles. (They are of course using much more sophisticated and accurate techniques.)
 As I claimed in the introduction, I make several limited assumptions and put several limits on the spaceship. It's possible to break those limits with some further work including:
 
 1. Extend 2D stimulation to 3D;
