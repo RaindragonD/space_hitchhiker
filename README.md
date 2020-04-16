@@ -9,7 +9,7 @@ Reinforcement learning (RL) is an area of machine learning that explores how an 
 
 <img src='./figs/eq1.png'>
 
-is maximized, where R_t is the reward at step t, and γ is a discount factor, `0 <= γ <= 1`.
+is maximized, where R<sub>t</sub> is the reward at step t, and γ is a discount factor, `0 <= γ <= 1`.
 
 To solve the problem, it is helpful to introduce the q function, `q : S × A → R` which gives the expected reward from taking an action a in a state s:
 
@@ -25,11 +25,11 @@ where the next state s' is deterministic given the current state s and the actio
 
 where α is the learning rate.
 
-After deriving the approximatoin of the q function, we can approximate the optimum policy as
+After deriving the approximation of the q function, we can approximate the optimum policy as
 
 <img src='./figs/eq5.png'>
 
-Finally, since the obervation space is usally very large (continuous values for physics), we need to discretize the observation space. Also, we keep some randomness for model to further explore the space without using the policy given above. This is decided by a parameter ε. With a probability 1-ε, the model randomly selects an action instead of utilizing the policy and q functions.
+Finally, since the observation space is usually very large (continuous values for physics), we need to discretize the observation space. Also, we keep some randomness for model to further explore the space without using the policy given above. This is decided by a parameter ε. With a probability 1-ε, the model randomly selects an action instead of utilizing the policy and q functions.
 
 
 ## Problem Formulation
@@ -40,12 +40,12 @@ Assume we start from the origin A, and the target is B, which is on the x-axis. 
 
 - The set of actions `A = {[0,Δv],[0,-Δv],[0,0]}`, which respectively represents 
   1) add a constant value to v<sub>y</sub> (accelerate in the y direction);
-  2) substract a constant value from v<sub>y</sub> (decelerate in the y direction);
+  2) subtract a constant value from v<sub>y</sub> (decelerate in the y direction);
   3) no acceleration.
 
-- The transition function, based on previous state s_<sub>t</sub>, use N-body solver to calculate the accelerations and evolve all positions and velocities to derive s<sub>t+1</sub>.
+- The transition function, based on previous state s<sub>t</sub>, use N-body solver to calculate the accelerations and evolve all positions and velocities to derive s<sub>t+1</sub>.
 
-- The reward funciton, 
+- The reward function, 
 
   <img src='./figs/eq6.png'> 
 
@@ -61,13 +61,13 @@ To implement the algorithm, I utilize object-oriented programming feature of Pyt
 - 2 = do nothing
 
 ## Trial #1 No Gravitational Objects
-This is a sanity check that the algorithm does work. The spaceship has a initial leftward velocity, and the target is right on the left of the starting point, so the best thing the model can do is to do nonthing and the  From Figure 1(a), we can see that the model fails many times during the training. Fugure1(b) shows that the spaceship successfully arrives at the target, and Figure1(c) shows that the model indeed chooses to do nothing (action 2) thoughout the travel.
+This is a sanity check that the algorithm does work. The spaceship has an initial leftward velocity, and the target is right on the left of the starting point, so the best thing the model can do is to do nothing and the  From Figure 1(a), we can see that the model fails many times during the training. Figure 1(b) shows that the spaceship successfully arrives at the target, and Figure1(c) shows that the model indeed chooses to do nothing (action 2) throughout the travel.
 
 ## Trial #2 One Gravitational Object
-With one gravitational object, the training is harder. Figure 2 shows a failing case. We can see from Figure 2(c) that the spaceship accelerates upward since the target but is above it, but the gravitational field ultimately deflects the spaceship and it passes the target. Figure 3 shows a successful case, and Figure 3(c) shows that the model gets "smarter" now by staying still or even accelerates downward from time to time to counter the effects of the gravitational field.
+With one gravitational object, the training is harder. Figure 2 shows a failing case. We can see from Figure 2(c) that the spaceship accelerates upward since the target but is above it, but the gravitational field ultimately deflects the spaceship and it passes the target. Figure 3 shows a successful case, and Figure 3(c) shows that the model gets "smarter" now and stays still or even accelerates downward from time to time to counter the effects of the gravitational field.
 
 ## Trial #3 Two Gravitational Objects
-In this trial, I test the case of two gravitational objects in the space. (Figure 4) It is interesting to note that the final actions of the model is actually very regular even though the model has the ccapacity to perform highly variant actions: it accelerates upward continuously for some time and then downward. This may illustrate the Occam's Razor Principle.
+In this trial, I test the case of two gravitational objects in the space. (Figure 4) It is interesting to note that the final actions of the model is actually very regular even though the model has the capacity to perform highly variant actions: it accelerates upward continuously for some time and then downward. This may illustrate the Occam's Razor Principle.
 
 <img src='./figs/result1.png'> 
 
@@ -79,15 +79,15 @@ I then introduces a much more "powerful" spaceship with 1000× magnitude of acce
 Finally, I gives the spaceship more "degrees of freedom" by embedding two more actions: accelerate upward or downward with smaller magnitude. So now the action encoding is:
   - 0 = accelerate upward with large magnitude
   - 1 = accelerate downward with large magnitude
-  - 2 = accelerate upwward with small magnitude
+  - 2 = accelerate upward with small magnitude
   - 3 = accelerate downward with small magnitude
   - 4 = no action
-The spaceship finally achives the target (Figure 7).
+The spaceship finally achieves the target (Figure 7).
 
 <img src='./figs/result2.png'> 
 
 # Discussion and Further Work
-I think this project is intersting in many ways. Certianly human beings would not be able to travel with spaceship through long distance in the near future, the algorihtm may be applied to other robotic systems like autonomous vehicles. (They are of course using much more sophisticated and accurate techniques.)
+I think this project is interesting in many ways. Certainly human beings would not be able to travel with spaceship through long distance in the near future, the algorithm may be applied to other robotic systems like autonomous vehicles. (They are of course using much more sophisticated and accurate techniques.)
 As I claimed in the introduction, I make several limited assumptions and put several limits on the spaceship. It's possible to break those limits with some further work including:
 
 1. Extend 2D stimulation to 3D;
