@@ -73,6 +73,14 @@ In this trial, I test a much harder scenario: I place a planet in between the ta
 
 I then introduces a much more "powerful" spaceship with 1000× magnitude of acceleration. Things get more interesting as the spaceship passes the planet, but it's overly powerful such that the acceleration cannot be fine-tuned to arrive at the target (Figure6).
 
+Finally, I gives the spaceship more "degrees of freedom" by embedding two more actions: accelerate upward or downward with smaller magnitude. So now the action encoding is:
+  - 0 = accelerate upward with large magnitude
+  - 1 = accelerate downward with large magnitude
+  - 2 = accelerate upwward with small magnitude
+  - 3 = accelerate downward with small magnitude
+  - 4 = no action
+The spaceship finally achives the target (Figure 7).
+
 <img src='./figs/result2.png'> 
 
 # Discussion and Further Work
