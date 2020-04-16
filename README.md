@@ -47,15 +47,18 @@ Assume we start from the origin A, and the target is B, which is on the x-axis. 
 
 - The reward funciton, 
 
-  <img src='./figs/eq4.png'> 
+  <img src='./figs/eq6.png'> 
 
-  where `C = 1/||A - B||`<sub>2</sub>, which measures how well does the current step perform comparing to the previous state, i.e. whether the action brings the spaceship closer to B.
+  where `C = 1/||A - B||`, which measures how well does the current step perform comparing to the previous state, i.e. whether the action brings the spaceship closer to B.
 
 # Implementation
 To implement the algorithm, I utilize object-oriented programming feature of Python. I created two classes, `SpaceTraversal` and `QLSolver`. `SpaceTraversal` encapsulates functions that enable the system to evolve for one step and returns the system's current status. The implementation is based on the N-body solver we did for problem set #5. `QLSolver` implements the Q-Learning algorithm given a `SpaceTraversal` object which is treated as the environment.
 
 # Results
-#### Note: for all trials, I initiate the spaceship with a initial leftward velocity. The possible actions for the spaceship is to accelerate upward (encoded as 0), accelerate downward (encoded as 1), and do nothing (encoded as 2).
+**Note**: for all trials, I initiate the spaceship with a initial leftward velocity. The possible actions for the spaceship are:
+- 0 = accelerate upward 
+- 1 = accelerate downward
+- 2 = do nothing
 
 ## Trial #1 No Gravitational Objects
 This is a sanity check that the algorithm does work. The spaceship has a initial leftward velocity, and the target is right on the left of the starting point, so the best thing the model can do is to do nonthing and the  From Figure 1(a), we can see that the model fails many times during the training. Fugure1(b) shows that the spaceship successfully arrives at the target, and Figure1(c) shows that the model indeed chooses to do nothing (action 2) thoughout the travel.
