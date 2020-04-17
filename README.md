@@ -67,7 +67,7 @@ This is a sanity check that the algorithm does work. The spaceship has an initia
 With one gravitational object, the training is harder. Figure 2 shows a failing case. We can see from Figure 2(c) that the spaceship accelerates upward since the target is above it, but the gravitational field ultimately deflects the spaceship further upward such that the spaceship passes the target. Figure 3 shows a successful case, and Figure 3(c) shows that the model gets "smarter" now and stays still or even accelerates downward from time to time to counter the effects of the gravitational field.
 
 ## Trial #3 Two Gravitational Objects
-In this trial, I test the case of two gravitational objects in the space (Figure 4). It is interesting to note that the final actions of the model is actually very regular even though the model has the capacity to perform highly variant actions: it accelerates upward continuously for some time and then accelerates downward. This illustrates the Occam's Razor Principle.
+In this trial, I test the case of two gravitational objects in the space (Figure 4). It is interesting to note that the final actions of the model is actually very regular even though the model has the capacity to perform highly variant actions: it stays still for some time and then continuously accelerates downward. The same is somewhat true for Trial #2. This illustrates the Occam's Razor Principle.
 
 <img src='./figs/result1.png'> 
 
